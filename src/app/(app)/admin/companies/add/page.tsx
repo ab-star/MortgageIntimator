@@ -1,6 +1,6 @@
-typescriptreact
+
 import { AddCompanyForm } from '@/components/forms/AddCompanyForm';
-import AdminLayout from '../../layout'; // Adjust the import path as needed
+import AdminLayout from '../../../layout'; // Corrected import path
 
 export default function AddCompanyPage() {
   return (
