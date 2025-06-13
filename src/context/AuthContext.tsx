@@ -68,18 +68,24 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   }, []);
 
   useEffect(() => {
+    console.log("AuthContext useEffect triggered"); // Added log
+    console.log("currentUser:", currentUser, "loading:", loading, "userProfile:", userProfile, "pathname:", pathname); // Added logs
     if (!loading) {
+      console.log("AuthContext: Loading is false"); // Added log
       const isAuthPage = pathname.startsWith('/login') || pathname.startsWith('/register');
       if (!currentUser && !isAuthPage) {
+        console.log("AuthContext: Not logged in and not on auth page, redirecting to login"); // Added log
         router.push('/login');
       } else if (currentUser && isAuthPage) {
+        console.log("AuthContext: Logged in and on auth page, checking role"); // Added log
         if (userProfile?.role === 'BackOffice/Admin') {
+          console.log("AuthContext: Admin role, redirecting to admin dashboard"); // Added log
           router.push('/admin/dashboard');
         } else if (userProfile?.role === 'Client') {
+          console.log("AuthContext: Client role, redirecting to dashboard"); // Added log
           router.push('/dashboard');
         } else {
-           // If role is not yet defined or unknown, might redirect to a pending page or login
-           // For now, assume role will be set upon registration
+           console.log("AuthContext: Unknown role, redirecting to login"); // Added log
            router.push('/login');
         }
       }
